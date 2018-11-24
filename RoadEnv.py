@@ -39,9 +39,9 @@ class Robot:
 
     def move(self, direction):
         if direction == 0 and self.height > 0:
-            self.height -= 1  # move up
+            self.height -= 2  # move up
         if direction == 1 and self.height < 80-10:
-            self.height += 1  # move down
+            self.height += 2  # move down
         if direction == 2:
             self.height = self.height  # stay
 

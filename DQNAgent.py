@@ -18,7 +18,7 @@ class DQNAgent:
         self.epsilon = 1.0  # exploration rate
         self.epsilon_min = 0.01
         self.epsilon_decay = 0.995
-        self.learning_rate = 0.01
+        self.learning_rate = 0.001
 
         if model_dir:
             # loading stored model archtitecture and model weights
@@ -37,7 +37,7 @@ class DQNAgent:
         seqmodel.add(Conv2D(64, (3, 3), strides=(1, 1)))
         seqmodel.add(Activation('relu'))
         seqmodel.add(Flatten())
-        seqmodel.add(Dense(256))
+        seqmodel.add(Dense(100))
         seqmodel.add(Activation('relu'))
         seqmodel.add(Dense(3))
 

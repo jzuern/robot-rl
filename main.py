@@ -42,7 +42,7 @@ for e in range(n_episodes):
 
     for step in range(max_steps):
 
-        if e % 100 == 0 and e > 15000:
+        if e % 200 == 0:
             env.render()
             time.sleep(0.1)
 
