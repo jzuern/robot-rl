@@ -8,14 +8,14 @@ from random import randint
 class Obstacle:
 
     def __init__(self):
-        self.hole_top = randint(0, 60)
+        self.hole_top = randint(0, 20)
         self.hole_bottom = self.hole_top + 20
-        self.pos_x = 80
+        self.pos_x = 40
 
     def reset(self):
-        self.hole_top = randint(0, 60)
+        self.hole_top = randint(0, 20)
         self.hole_bottom = self.hole_top + 20
-        self.pos_x = 80
+        self.pos_x = 40
 
     def step(self):
         self.pos_x -= 1  # increment position
@@ -40,7 +40,7 @@ class Robot:
     def move(self, direction):
         if direction == 0 and self.height > 0:
             self.height -= 2  # move up
-        if direction == 1 and self.height < 80-10:
+        if direction == 1 and self.height < 40-5:
             self.height += 2  # move down
         if direction == 2:
             self.height = self.height  # stay
@@ -52,10 +52,10 @@ class Robot:
         return self.height
 
     def get_x(self):
-        return 40
+        return 20
 
     def reset(self):
-        self.height = randint(10, 70)
+        self.height = randint(5, 35)
 
 
 class RoadEnv(gym.Env, utils.EzPickle):
@@ -66,7 +66,7 @@ class RoadEnv(gym.Env, utils.EzPickle):
 
         self.viewer = rendering.SimpleImageViewer()
 
-        self._action_set = {0, 1, 2}  # go up, go down, or stay
+        self._action_set = {0, 1}  # go up, go down
         self.action_space = spaces.Discrete(len(self._action_set))
 
         # init obstacle
@@ -104,13 +104,13 @@ class RoadEnv(gym.Env, utils.EzPickle):
 
         distance_x = abs(rob_pos_x - obstacle_pos_x)
 
-        collide_x = distance_x < 10
-        collide_y = rob_pos_y < top or (rob_pos_y + 10 > bottom)
+        collide_x = distance_x < 5
+        collide_y = rob_pos_y < top or (rob_pos_y + 5 > bottom)
 
         game_over = False
+        reward = 0.0
 
         if collide_x and collide_y:
-            reward = -1.0
             game_over = True
         else:
             reward = 0.1
@@ -146,10 +146,10 @@ class RoadEnv(gym.Env, utils.EzPickle):
     @property
     def _get_image(self):
 
-        img = np.zeros(shape=(80, 80, 1), dtype=np.uint8)
+        img = np.zeros(shape=(40, 40, 1), dtype=np.uint8)
 
         obstacle_x = self.obstacle.get_pos()
-        width = 9
+        width = 4
 
         img[:, obstacle_x:obstacle_x + width, 0] = 128
 

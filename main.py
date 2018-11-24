@@ -9,7 +9,7 @@ from DQNAgent import DQNAgent
 env = RoadEnv()
 
 # size of input image
-state_size = 80 * 80 * 1
+state_size = 40 * 40 * 1
 
 # size of possible actions
 action_size = env.action_space.n

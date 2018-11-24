@@ -30,7 +30,7 @@ class DQNAgent:
     def _build_model(self):
 
         seqmodel = Sequential()
-        seqmodel.add(Conv2D(32, (8, 8), strides=(4, 4), input_shape=(80, 80, 1)))
+        seqmodel.add(Conv2D(32, (8, 8), strides=(4, 4), input_shape=(40, 40, 1)))
         seqmodel.add(Activation('relu'))
         seqmodel.add(Conv2D(64, (4, 4), strides=(2, 2)))
         seqmodel.add(Activation('relu'))
@@ -39,7 +39,7 @@ class DQNAgent:
         seqmodel.add(Flatten())
         seqmodel.add(Dense(100))
         seqmodel.add(Activation('relu'))
-        seqmodel.add(Dense(3))
+        seqmodel.add(Dense(2))
 
         adam = Adam(lr=1e-6)
         seqmodel.compile(loss='mse', optimizer=adam)
@@ -76,18 +76,3 @@ class DQNAgent:
 
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
-
-
-    # def save_model(self):
-    #
-    #     # serialize model to HDF5
-    #     self.model.save_weights("model-weights.h5")
-    #     print("Saved model weights to disk")
-    #
-    # def load_model(self, model_dir):
-    #
-    #     # load weights into new model
-    #     self.model = self._build_model()
-    #     self.model.load_weights(model_dir)
-    #     print("Loaded model from disk")
-
