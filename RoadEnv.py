@@ -148,8 +148,6 @@ class RoadEnv(gym.Env, utils.EzPickle):
 
         img = np.zeros(shape=(80, 80, 1), dtype=np.uint8)
 
-        # img[10,0,0] = 255
-
         obstacle_x = self.obstacle.get_pos()
         width = 9
 

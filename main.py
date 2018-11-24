@@ -11,7 +11,7 @@ env = RoadEnv()
 # size of input image
 state_size = 80 * 80 * 1
 
-# size of possible actions (2)
+# size of possible actions
 action_size = env.action_space.n
 
 # Deep-Q-Learning agent
