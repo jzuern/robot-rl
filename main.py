@@ -28,16 +28,13 @@ n_episodes = 20000
 
 scores_deque = deque()
 deque_length = 100
-all_avg_scores = [0]
+all_avg_scores = []
 
 training = True
-render = False
 
 
-# for e in range(n_episodes):
-e = 0
+for e in range(n_episodes):
 
-while True:
     state = env.reset()
     reward = 0.0
 
@@ -45,7 +42,7 @@ while True:
 
     for step in range(max_steps):
 
-        if e % 100 == 0 and e > 10000:
+        if e % 100 == 0 and e > 15000:
             env.render()
             time.sleep(0.1)
 
@@ -70,9 +67,12 @@ while True:
 
             print("episode: {}/{}, #steps: {},reward: {}, e: {}, scores average = {}"
                   .format(e, n_episodes, step, reward, agent.epsilon, scores_average))
-
-            e += 1
             break
+
+    if e % 500 == 0:
+        with open('scores.csv', 'w') as f:
+            for score in all_avg_scores:
+                f.write("%s\n" % score)
 
     if training:
         if len(agent.memory) > batch_size:
