@@ -8,13 +8,13 @@ from random import randint
 class Obstacle:
 
     def __init__(self):
-        self.hole_top = randint(0, 20)
-        self.hole_bottom = self.hole_top + 20
+        self.hole_top = randint(0, 30)
+        self.hole_bottom = self.hole_top + 10
         self.pos_x = 40
 
     def reset(self):
-        self.hole_top = randint(0, 20)
-        self.hole_bottom = self.hole_top + 20
+        self.hole_top = randint(0, 30)
+        self.hole_bottom = self.hole_top + 10
         self.pos_x = 40
 
     def step(self):
