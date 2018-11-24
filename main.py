@@ -32,7 +32,6 @@ all_avg_scores = []
 
 training = True
 
-
 for e in range(n_episodes):
 
     state = env.reset()
@@ -41,10 +40,6 @@ for e in range(n_episodes):
     start = time.time()
 
     for step in range(max_steps):
-
-        if e % 200 == 0:
-            env.render()
-            time.sleep(0.1)
 
         done = False
 
@@ -68,11 +63,6 @@ for e in range(n_episodes):
             print("episode: {}/{}, #steps: {},reward: {}, e: {}, scores average = {}"
                   .format(e, n_episodes, step, reward, agent.epsilon, scores_average))
             break
-
-    if e % 500 == 0:
-        with open('scores.csv', 'w') as f:
-            for score in all_avg_scores:
-                f.write("%s\n" % score)
 
     if training:
         if len(agent.memory) > batch_size:
